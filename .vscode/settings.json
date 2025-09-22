@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS sessions;{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render.com",
+            "connectString": "postgresql://cse340si:B2i97g0bUoVPveKZRZxFNvDYVvuYL2Ao@dpg-d304p6ggjchc73co0jrg-a.oregon-postgres.render.com/cse340si_p4mb"
+        }
+    ]
+}
