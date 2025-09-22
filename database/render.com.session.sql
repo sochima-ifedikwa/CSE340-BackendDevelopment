@@ -229,11 +229,11 @@ VALUES   (
     'After the police force updated their fleet these cars are now available to the public! These cars come equiped with the siren which is convenient for college students running late to class.',
     '/images/crwn-vic.jpg',
     '/images/crwn-vic-tn.jpg',
-    ;;;;10000,
-    1 08247,
+    10000,
+    108247,
     'White',
     5
-  );  
+  );
 
 
 UPDATE "inventory"
