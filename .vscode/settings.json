@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS sessions;{
+{
     "sqltools.connections": [
         {
             "pgOptions": {
@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS sessions;{
             "server": "localhost",
             "driver": "PostgreSQL",
             "name": "render.com",
-            "connectString": "postgresql://cse340si:B2i97g0bUoVPveKZRZxFNvDYVvuYL2Ao@dpg-d304p6ggjchc73co0jrg-a.oregon-postgres.render.com/cse340si_p4mb"
+            "connectString": "postgresql://cse340si:K7AYsdN4vAf4OSiJJJD3LUkmzMZNqG03@dpg-d3904tffte5s73celch0-a.oregon-postgres.render.com/cse340si_btnq"
         }
     ]
 }
