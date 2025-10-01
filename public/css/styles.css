@@ -275,3 +275,122 @@ section {
   }
   /* END index.ejs styles */
 }
+
+/* Vehicle Detail Section */
+.vehicle-detail {
+  display: flex;
+  gap: 32px;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.vehicle-image img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.vehicle-info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.vehicle-info h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.price {
+  font-size: 1.3rem;
+  color: #0077cc;
+  margin: 12px 0;
+}
+
+@media (max-width: 700px) {
+  .vehicle-detail {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .vehicle-image img {
+    max-width: 100%;
+  }
+}
+
+/* TAKE NOTE OF THAT */
+/****** Inventory Page Design ***************/
+
+#inv-display {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* responsive columns */
+  gap: 40px;
+  padding: 2rem;
+}
+
+#inv-display li {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-rows: auto auto auto; /* image, name/price, button */
+  gap: 1rem;
+  text-align: center;
+}
+
+#inv-display img{
+  height: 150px;
+  width: 250px;
+  border-radius: 8px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  margin-top: 10px;
+}
+
+#inv-display span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inventory detail page */
+.detail-container {
+  display: flex; 
+  padding: 2rem;
+  border-radius: 10px;
+  flex-wrap: wrap;    /* allow items to wrap on smaller screens */
+}
+.detail-image img {
+  max-width: 100%;    /* image scales within its container */
+  height: auto;
+  border-radius: 10px;
+}
+
+.detail-info {
+  flex: 1 1 45%;/* flexible: grows, shrinks, basis 45% */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  min-width: 280px;/* prevents shrinking too small */
+  font-size: clamp(1rem, 2vw, 1.5rem); /* responsive text size */
+  line-height: 1.6;
+}
+
+.description{
+  color: black;
+}
+
+/* Remove default list styling */
+.detail-info ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+.detail-info li {
+  list-style: none;
+  padding-left: 0;
+}

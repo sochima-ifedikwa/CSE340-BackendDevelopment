@@ -11,6 +11,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+const invController = require("./controllers/invController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities")
 
@@ -33,25 +34,31 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 
 // File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
 
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message,
+  let nav="";
+  try {
+    nav = await utilities.getNav();
+  } catch (e) {
+    nav = ""; // fallback if nav fails
+  }
+  res.status(err.status || 500);
+  res.render("error", {
+    title: "Error",
+    message: err.message,
+    error: err,
     nav
-  })
-})
-
+  });
+});
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
