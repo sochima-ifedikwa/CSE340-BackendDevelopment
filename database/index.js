@@ -13,25 +13,32 @@ if (process.env.NODE_ENV == "development") {
     ssl: {
       rejectUnauthorized: false,
     },
-})
+  })
+} else {
+  pool = new Pool({
+    user: process.env.DB_USER || "postgres",
+    password: process.env.DB_PASSWORD || "",
+    host: process.env.DB_HOST || "localhost",
+    port: parseInt(process.env.DB_PORT, 10) || 5432,
+    database: process.env.DB_NAME || "cse340_assignment2",
+    ssl: false,
+  });
+}
 
 // Added for troubleshooting queries
 // during development
-module.exports = {
-  async query(text, params) {
-    try {
-      const res = await pool.query(text, params)
-      console.log("executed query", { text })
-      return res
-    } catch (error) {
-      console.error("error in query", { text })
-      throw error
-    }
-  },
+
+async function query(text, params) {
+  try {
+    const res = await pool.query(text, params);
+    return res;
+  } catch (error) {
+    console.error("Database query error:", { text, params, error });
+    throw error;
+  }
 }
-} else {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  })
-  module.exports = pool
+
+module.exports = {
+  query,
+  pool,
 }
