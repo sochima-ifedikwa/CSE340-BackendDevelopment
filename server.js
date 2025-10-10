@@ -6,7 +6,7 @@
 /* ***********************
  * Require Statements
  *************************/
-// const favicon = require('serve-favicon')
+const favicon = require('serve-favicon')
 const path = require('path')
 const express = require("express")
 const session = require("express-session")
@@ -86,11 +86,9 @@ app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
 
 // File Not Found Route - must be last route in list
-app.use((req, res, next) => {
-  const err = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 
 /* ************************************************
 * Enhanced and more general Express Error Handler *
