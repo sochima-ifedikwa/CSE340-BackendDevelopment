@@ -27,6 +27,7 @@ const bodyParser = require("body-parser")
 /* ***********************
  * Middleware
  * ************************/
+//  app.use(favicon(path.join(__dirname, 'public', 'images', 'site', 'favicon.ico')))
  app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
