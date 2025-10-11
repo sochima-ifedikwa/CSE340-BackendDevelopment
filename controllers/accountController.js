@@ -116,7 +116,7 @@ async function registerAccount(req, res) {
 }
 
 /* ****************************************
- *  Process Log in
+ *  Process Log in request
  * *************************************** */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav();
