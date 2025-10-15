@@ -20,7 +20,8 @@ const baseController = require("./controllers/baseController")
 const usersRoute = require("./routes/usersRoute");
 const accountRoute = require("./routes/accountRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
-const contactRoute = require("./routes/")
+const contactRoute = require('./routes/contactRoute');
+
 const utilities = require("./utilities")
 const bodyParser = require("body-parser")
 
