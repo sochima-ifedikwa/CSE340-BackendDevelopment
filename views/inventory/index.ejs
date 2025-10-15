@@ -1,35 +1,26 @@
-<h1 class="page-title"><%= title %></h1>
+<% if (title) { %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %> <%- messages() %> <br>
 
-<!-- Flash Messages -->
-<% if (messages) { %>
-  <% for (let type in messages) { %>
-    <% messages[type].forEach(function(msg) { %>
-      <div class="flash-message <%= type %>"><%= msg %></div>
-    <% }) %>
-  <% } %>
-<% } %>
+      <ul id="man-display">
+        <li>
+          <a href="../../inv/add-classification" title="Add New Classification view">Add New Classification</a>
+        </li>
+        <li>
+          <a href="../../inv/add-inventory" title="Add New Vehicle view">Add New Vehicle</a>
+        </li>
+      </ul>
 
-<!-- Quick Links -->
-<div class="quick-links">
-  <%- VehicleMgtGrid %>
-</div>
+      <div class="manager-container">
+        <h2>Manage Inventory</h2>
+        <p>Choose a classification to see those inventory items.</p>
 
-<!-- Vehicle Management Grid -->
-<section class="inventory-section">
-  <h2>Manage Inventory</h2>
+        <%- classificationSelect %>
 
-  <div class="classification-select">
-    <label for="classificationList">Choose a classification:</label>
-    <select id="classificationList">
-      <% classifications.forEach(c => { %>
-        <option value="<%= c.classification_id %>"><%= c.classification_name %></option>
-      <% }) %>
-    </select>
-  </div>
+          <table id="inventoryDisplay"></table>
+          <noscript>JavaScript must be enabled to use this page.</noscript>
+      </div>
 
-  <table id="inventoryDisplay" class="inventory-table"></table>
-
-  <noscript>JavaScript must be enabled to use this page.</noscript>
-</section>
-
-<script src="../../public/js/inventory.js"></script>
+      <script src="../../js/inventory.js"></script>

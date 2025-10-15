@@ -13,28 +13,39 @@ async function getClassifications() {
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i 
-      JOIN public.classification AS c 
-      ON i.classification_id = c.classification_id 
-      WHERE i.classification_id = $1`,
+      `SELECT i.*, c.classification_name
+       FROM public.inventory AS i
+       JOIN public.classification AS c 
+       ON i.classification_id = c.classification_id 
+       WHERE i.classification_id = $1`,
       [classification_id]
-    )
-    return data.rows
+    );
+
+    // ✅ Vérifie qu’on a bien reçu des données
+    if (!data || !data.rows || data.rows.length === 0) {
+      console.warn(`No inventory found for classification_id = ${classification_id}`);
+      return [];
+    }
+
+    return data.rows;
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
+    console.error("getInventoryByClassificationId error:", error);
+    return [];
   }
 }
 
+/* ***************************
+ *  Get inventory item by inv_id
+ * ************************** */
 async function getItemByInvId(inv_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i 
-      WHERE i.inv_id = $1`,
+      `SELECT * FROM public.inventory AS i WHERE i.inv_id = $1`,
       [inv_id]
     );
     return data.rows[0];
   } catch (error) {
-    console.error("getItemByInvId error " + error);
+    console.error("getItemByInvId error:", error);
   }
 }
 
@@ -47,6 +58,7 @@ async function registerClassification(classification_name) {
       "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *";
     return await pool.query(sql, [classification_name]);
   } catch (error) {
+    console.error("registerClassification error:", error);
     return error.message;
   }
 }
@@ -82,6 +94,7 @@ async function registerVehicle(
       inv_color,
     ]);
   } catch (error) {
+    console.error("registerVehicle error:", error);
     return error.message;
   }
 }
@@ -120,20 +133,20 @@ async function updateInventory(
     ]);
     return data.rows[0];
   } catch (error) {
-    console.error("model error: " + error);
+    console.error("updateInventory error:", error);
   }
 }
 
 /* *****************************
-*   Delete a inventory Vehicle
+*   Delete inventory Vehicle
 * *************************** */
 async function deleteInventoryItem(inv_id) {
   try {
-    const sql = "DELETE FROM inventory WHERE inv_id = $1"
-    const data = await pool.query(sql, [inv_id])
+    const sql = "DELETE FROM inventory WHERE inv_id = $1";
+    const data = await pool.query(sql, [inv_id]);
     return data;
   } catch (error) {
-    new Error("Delete Inventory Error");
+    console.error("deleteInventoryItem error:", error);
   }
 }
 
