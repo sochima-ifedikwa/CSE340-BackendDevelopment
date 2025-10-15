@@ -5,7 +5,7 @@ const staticController = {};
 staticController.buildContact = async function (req, res, next) {
   try {
     const nav = await utilities.getNav();
-    res.render("contact", {
+    res.render("contact/contact", {
       title: "Contact Us",
       nav,
       errors: null,

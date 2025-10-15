@@ -20,6 +20,7 @@ const baseController = require("./controllers/baseController")
 const usersRoute = require("./routes/usersRoute");
 const accountRoute = require("./routes/accountRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
+const contactRoute = require("./routes/contactRoute"); 
 const utilities = require("./utilities")
 const bodyParser = require("body-parser")
 
@@ -89,6 +90,12 @@ app.use("/inv", inventoryRoute)
 
 // Account routes
 app.use("/account", accountRoute)
+
+// Users routes
+app.use("/users", usersRoute);
+
+// Contact route
+app.use("/contact", contactRoute);
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
